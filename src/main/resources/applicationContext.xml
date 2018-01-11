@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.2.xsd        
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+        http://www.springframework.org/schema/jee 
+        http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+        ">
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.pcbwx.shiro">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<!-- <context:property-placeholder location="classpath:jdbc.properties" /> -->
+	<context:property-placeholder location="file:${CONFIG_SPACE}/shiro/spring.properties" />
+
+	<!-- ========================配置数据源1===================== -->
+	<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClass}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<!-- 产生sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	</bean>
+
+	<!-- 自动将dao包下类根据接口名第一个字母小写生成id名 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+		<property name="basePackage" value="com.pcbwx.shiro.dao"></property>
+	</bean>
+
+	<!-- 声明式事务管理 -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="is*" read-only="true" />
+			<!-- <tx:method name="get*" read-only="true" /> -->
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="list*" read-only="true" />
+			<tx:method name="select*" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" isolation="DEFAULT"
+				rollback-for="java.lang.RuntimeException" read-only="false" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="cut"
+			expression="execution(* com.pcbwx.shiro.service..*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="cut" />
+	</aop:config>
+
+	<!-- ====================================================== -->
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="java.util.Date" value="com.pcbwx.shiro.common.DateEditor" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="cacheService" class="com.pcbwx.shiro.component.CacheServiceImpl">
+  	</bean>  	
+	<bean id="logContext" class="com.pcbwx.shiro.component.LogContext" init-method="init">
+    	<property name="logService" ref="logService"/>
+  	</bean>
+  	
+	<!-- 任务配置 -->
+	<bean id="importTask" class="com.pcbwx.shiro.quartz.ImportTask"></bean>
+	
+	<bean id="serviceRouterContext" class="com.pcbwx.shiro.component.ServiceRouter" init-method="init">
+    	<property name="cacheService" ref="cacheService"/>
+  	</bean>
+  	
+  	<bean id="exceptionResolver" class="com.pcbwx.shiro.exception.CommonExceptionHandler"/>
+  	
+	<!-- spring 定时器的配置 -->
+	<!-- 要调用的工作类 -->
+	<bean id="quartzJob" class="com.pcbwx.shiro.quartz.QuartzJob"></bean>
+
+	<bean id="reloadTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="quartzJob" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>reloadCache</value>
+		</property>
+	</bean>
+	<bean id="dataSyncTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="quartzJob" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>dataSync</value>
+		</property>
+	</bean>
+
+	<!--定义触发时间 -->
+	<bean id="reloadTimer"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="reloadTask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>${reload.timer.cron.expression}</value>
+		</property>
+	</bean>
+	<bean id="dataSyncTimer"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="dataSyncTask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>${dataSync.timer.cron.expression}</value>
+		</property>
+	</bean>
+	
+	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+	<bean id="startQuertz" lazy-init="false" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="reloadTimer" />
+				<ref bean="dataSyncTimer" />
+			</list>
+		</property>
+	</bean>
+ 
+</beans>
