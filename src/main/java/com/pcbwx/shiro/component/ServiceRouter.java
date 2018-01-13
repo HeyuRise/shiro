@@ -1,9 +1,10 @@
 package com.pcbwx.shiro.component;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ServiceRouter {
-	private static Logger logger = Logger.getLogger(ServiceRouter.class);
+	private static final Logger logger = LogManager.getLogger(ServiceRouter.class);
 
 	private static CacheService cacheService;
 

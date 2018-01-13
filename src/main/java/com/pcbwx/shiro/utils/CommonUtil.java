@@ -9,7 +9,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.pcbwx.shiro.annotation.FieldMap;
 import com.pcbwx.shiro.map.ChannelDeserialize;
@@ -24,7 +25,7 @@ import com.pcbwx.shiro.map.ChannelDeserialize;
 public class CommonUtil {
 
 	private static SimpleDateFormat sdf = null;
-	private static final Logger logger = Logger.getLogger(CommonUtil.class);
+	private static final Logger logger = LogManager.getLogger(CommonUtil.class);
 
 	public static void main(String[] args) {
 		// CommonUtil.sendAuthCode("18668187252");

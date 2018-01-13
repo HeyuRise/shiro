@@ -10,7 +10,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
@@ -66,7 +67,8 @@ import com.pcbwx.shiro.utils.XMLUtil;
 @Service("orderservice")
 public class OrderServiceIpml implements OrderService {
 
-	Logger logger = Logger.getLogger(OrderServiceIpml.class);
+	private static final Logger logger = LogManager.getLogger(OrderServiceIpml.class);
+	
 	@Autowired
 	private CacheService cacheService;
 	@Autowired

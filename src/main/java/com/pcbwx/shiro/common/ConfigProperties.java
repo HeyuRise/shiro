@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.pcbwx.shiro.common.exception.BusinessException;
 import com.pcbwx.shiro.common.exception.ExceptionType;
@@ -19,7 +20,7 @@ import com.pcbwx.shiro.enums.ConfigEnum;
  *
  */
 public class ConfigProperties {
-	private static Logger logger = Logger.getLogger(ConfigProperties.class);
+	private static final Logger logger = LogManager.getLogger(ConfigProperties.class);
 	
 	private final static String mySystemCode = "shiro";
 	

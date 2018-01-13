@@ -21,7 +21,7 @@
 		
 		<!-- <session-management invalid-session-url="/login.jsp" /> -->
 		
-		<logout invalidate-session="true" logout-url="/logout"  logout-success-url="/login.jsp" />
+		<logout invalidate-session="true" logout-url="/logout" logout-success-url="/login.jsp" />
 		<custom-filter ref="customFilter" before="FILTER_SECURITY_INTERCEPTOR"/>
 	</http>
 

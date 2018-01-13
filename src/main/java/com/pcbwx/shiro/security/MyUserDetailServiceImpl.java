@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
@@ -35,7 +36,7 @@ public class MyUserDetailServiceImpl implements UserDetailsService {
 	@Autowired
 	private WxtbUserMapper wxtbUserMapper;
 	
-	Logger logger = Logger.getLogger(MyUserDetailServiceImpl.class);
+	private static final Logger logger = LogManager.getLogger(MyUserDetailServiceImpl.class);
 	
 	@Override
 	//通过cas返回的用户名，重载为系统中自定义的用户

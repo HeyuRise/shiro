@@ -7,7 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -40,7 +41,7 @@ import com.pcbwx.shiro.utils.DataUtil;
 @Transactional
 public class MySecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 	
-	private Logger logger = Logger.getLogger(MySecurityMetadataSource.class);
+	private static final Logger logger = LogManager.getLogger(MySecurityMetadataSource.class);
 	
 	private static Map<String, Collection<ConfigAttribute>> resourceMap = null;  
 

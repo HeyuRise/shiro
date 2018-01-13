@@ -3,7 +3,8 @@ package com.pcbwx.shiro.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,8 +23,7 @@ import com.pcbwx.shiro.service.LogService;
 public class LogInterceptor extends HandlerInterceptorAdapter implements
 		HandlerInterceptor {
 
-	private static final Logger logger = Logger
-			.getLogger(LogInterceptor.class);
+	private static final Logger logger = LogManager.getLogger(LogInterceptor.class);
 
 	@Autowired
 	private LogService logService; // 日志业务接口

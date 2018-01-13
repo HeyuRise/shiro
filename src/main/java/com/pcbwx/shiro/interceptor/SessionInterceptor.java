@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,7 +25,7 @@ import com.pcbwx.shiro.service.AccountService;
  */
 public class SessionInterceptor implements HandlerInterceptor {
 
-	private static final Logger logger = Logger.getLogger(SessionInterceptor.class);
+	private static final Logger logger = LogManager.getLogger(SessionInterceptor.class);
 
 	@Autowired
 	private AccountService accountService;

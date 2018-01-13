@@ -3,7 +3,8 @@ package com.pcbwx.shiro.utils;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Session监听器
@@ -13,8 +14,7 @@ import org.apache.log4j.Logger;
  */
 public class SessionListener implements HttpSessionListener {
 
-	private static final Logger logger = Logger
-			.getLogger(SessionListener.class);
+	private static final Logger logger = LogManager.getLogger(SessionListener.class);
 
 	/**
 	 * Notification that a session was created.

@@ -6,7 +6,7 @@
 
 	<settings>
 		<!-- 开启日志 -->
-		<setting name="logImpl" value="LOG4J" />
+		<setting name="logImpl" value="SLF4J" />
 		<!-- 开启全部复杂的(关联)自动映射 -->
 		<setting name="autoMappingBehavior" value="FULL" />
 		<!-- 开启所有表的自动增长 -->

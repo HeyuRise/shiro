@@ -13,11 +13,12 @@ import java.util.List;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
     
 public class FtpUtil {
 	
-	private static Logger logger = Logger.getLogger(FtpUtil.class);
+	private static final Logger logger = LogManager.getLogger(FtpUtil.class);
 	
     private static FTPClient ftpClient;    
     public static final int BINARY_FILE_TYPE = FTP.BINARY_FILE_TYPE;    

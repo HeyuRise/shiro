@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.pcbwx.shiro.enums.DictionaryEnum;
 import com.pcbwx.shiro.model.Address;
@@ -20,7 +21,7 @@ import com.pcbwx.shiro.model.UserRoleRelation;
 import com.pcbwx.shiro.utils.DataUtil;
 
 public class CacheServiceImpl implements CacheService {
-	private static Logger logger = Logger.getLogger(CacheServiceImpl.class);
+	private static final Logger logger = LogManager.getLogger(CacheServiceImpl.class);
 	
 	// type#id,Dictionary / type|code,Dictionary
 	private Map<String, Dictionary> dictionaryCache = new HashMap<String, Dictionary>();

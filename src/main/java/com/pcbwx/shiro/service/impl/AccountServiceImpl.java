@@ -6,7 +6,8 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -38,7 +39,8 @@ import com.pcbwx.shiro.utils.DateTimeUtil;
 
 @Service("accountService")
 public class AccountServiceImpl implements AccountService {
-	Logger logger = Logger.getLogger(AccountServiceImpl.class);
+	
+	private static final Logger logger = LogManager.getLogger(AccountServiceImpl.class);
 	
 	@Autowired
 	private AddressMapper addressMapper;

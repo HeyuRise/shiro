@@ -13,7 +13,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,7 +39,7 @@ import com.pcbwx.shiro.service.RouteService;
 @Api(tags = "快递单管理Api")
 public class OrderController extends BaseController {
 	
-	private static Logger logger = Logger.getLogger(OrderController.class);
+	private static final Logger logger = LogManager.getLogger(OrderController.class);
 
 	@Autowired
 	private OrderService orderService;
@@ -102,9 +103,6 @@ public class OrderController extends BaseController {
 		if (status == null || status.equals("")) {
 			status = null;
 		}
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
-		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.ORDER_EXPRESS.getCode(), wxtbUser.getAccount(), null);
 		return orderService.getExpressOrders(orderId, mailno, mailnoChild, sendCompany,
 				receiveCompany, sendContact, receiveContact, sendDateBegin,
 				sendDateEnd, receiveDateBegin, receiveDateEnd, status, page, size);

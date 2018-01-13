@@ -3,7 +3,8 @@ package com.pcbwx.shiro.utils;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * 公共通用date工具包
@@ -14,7 +15,7 @@ import org.apache.log4j.Logger;
  */
 public class DateCalcUtil {
 
-	private static final Logger logger = Logger.getLogger(DateCalcUtil.class);
+	private static final Logger logger = LogManager.getLogger(DateCalcUtil.class);
 
 	public static class DateParam {
 		private int year;		//获取年份

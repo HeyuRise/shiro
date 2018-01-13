@@ -9,19 +9,17 @@ import java.net.ConnectException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.alibaba.fastjson.JSONObject;
-import com.pcbwx.shiro.common.ConfigProperties;
 import com.pcbwx.shiro.common.trust.MyX509TrustManager;
-import com.pcbwx.shiro.enums.ConfigEnum;
 
 /**
  * 公众平台通用接口工具类
@@ -30,7 +28,7 @@ import com.pcbwx.shiro.enums.ConfigEnum;
  * @date 2013-08-09
  */
 public class DingUtil {
-	private static final Logger logger = Logger.getLogger(DingUtil.class);
+	private static final Logger logger = LogManager.getLogger(DingUtil.class);
 
 	//	通过code获取钉用户身份
 	private final static String GET_USER_INFO_URL = "https://oapi.dingtalk.com/user/getuserinfo?access_token=ACCESS_TOKEN&code=CODE";

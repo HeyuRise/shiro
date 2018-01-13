@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * 读取配置文件工具类
@@ -17,7 +18,7 @@ public class PropertyUtil {
 
 	private static PropertyUtil util = null;
 	private static Map<String,Properties> props = null;
-	private static final Logger logger = Logger.getLogger(PropertyUtil.class);
+	private static final Logger logger = LogManager.getLogger(OrderUtil.class);
 	private PropertyUtil(){
 		
 	}

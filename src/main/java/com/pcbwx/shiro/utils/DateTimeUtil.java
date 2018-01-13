@@ -5,7 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * 常用工具函数类. 用静态函数的方法定义一些常用的函数，如字符串转数字、字符串转日期等。 *
@@ -13,7 +14,7 @@ import org.apache.log4j.Logger;
  */
 public class DateTimeUtil {
 
-	private static final Logger logger = Logger.getLogger(DateTimeUtil.class);
+	private static final Logger logger = LogManager.getLogger(DateTimeUtil.class);
 	
 	/**
 	 * 将字符串时间转换为Date类型的时间

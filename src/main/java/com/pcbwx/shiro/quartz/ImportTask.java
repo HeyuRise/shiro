@@ -40,7 +40,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pcbwx.shiro.bean.syn.ContactSyn;
@@ -72,7 +73,7 @@ import com.pcbwx.shiro.utils.DateTimeUtil;
 import com.pcbwx.shiro.utils.JsonUtil;
 
 public class ImportTask {
-	private static Logger logger = Logger.getLogger(ImportTask.class);
+	private static final Logger logger = LogManager.getLogger(ImportTask.class);
 
 	// 匹配14位数字
 	private String reg = "[0-9]{14}";

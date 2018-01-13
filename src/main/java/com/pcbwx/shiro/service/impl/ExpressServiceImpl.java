@@ -9,7 +9,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,7 +68,7 @@ import com.pcbwx.shiro.utils.XMLUtil;
 @Service("expressService")
 public class ExpressServiceImpl implements ExpressService{
 	
-	Logger logger = Logger.getLogger(ExpressServiceImpl.class);
+	private static final Logger logger = LogManager.getLogger(ExpressServiceImpl.class);
 	
 	// 匹配14位数字
 	private String reg = "[0-9]{11}";

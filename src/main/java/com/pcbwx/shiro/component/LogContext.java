@@ -6,7 +6,8 @@ package com.pcbwx.shiro.component;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.pcbwx.shiro.enums.LogTypeEnum;
 import com.pcbwx.shiro.model.Log;
@@ -20,7 +21,8 @@ import com.pcbwx.shiro.utils.DateTimeUtil;
  *
  */
 public class LogContext {
-	private static Logger logger = Logger.getLogger(LogContext.class);
+	private static final Logger logger = LogManager.getLogger(LogContext.class);
+	
 	private static ThreadLocal<Log> local = new ThreadLocal<Log>();
 
 	private static LogService logService;

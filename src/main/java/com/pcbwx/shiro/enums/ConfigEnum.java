@@ -17,6 +17,7 @@ public enum ConfigEnum {
 	ADDRESS_CLOCK("address.clock", "请求全国行政区的时间"),
 	MAILNO_FILEPATH("mailno.filepath", "请求全国行政区的时间"),
 	ORDER_ID_HEAD("order.id.head", "订单号开头"),
+	IS_ONLINE("is.online", "是否为线上环境"),
 	
 	//-------------------邮件配置项-----------------------------------
 	SEND_MAIL_TRANSPORT_PROTOCOL("send.mail.transport.protocol", "发送邮件的协议"),

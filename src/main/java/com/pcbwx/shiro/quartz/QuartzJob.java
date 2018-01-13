@@ -3,7 +3,8 @@ package com.pcbwx.shiro.quartz;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pcbwx.shiro.component.LogContext;
@@ -23,7 +24,7 @@ import com.pcbwx.shiro.utils.DateTimeUtil;
  */
 public class QuartzJob {
 
-	private static Logger logger = Logger.getLogger(QuartzJob.class);
+	private static final Logger logger = LogManager.getLogger(QuartzJob.class);
 
 	@Autowired
 	private SupportService supportService;

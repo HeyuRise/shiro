@@ -24,7 +24,8 @@ import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.pcbwx.shiro.common.ConfigProperties;
 import com.squareup.okhttp.FormEncodingBuilder;
@@ -38,7 +39,7 @@ import com.squareup.okhttp.Response;
  * 版权：中国银联 说明：以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己的需要，按照技术文档编写,并非一定要使用该代码。该代码仅供参考。
  * */
 public class HttpUtil {
-	private static Logger logger = Logger.getLogger(HttpUtil.class);
+	private static final Logger logger = LogManager.getLogger(FtpUtil.class);
 
 	public static String encoding;
 

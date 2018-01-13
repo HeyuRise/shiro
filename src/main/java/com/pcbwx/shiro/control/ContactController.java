@@ -11,7 +11,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ import com.pcbwx.shiro.service.LogService;
 @Api(tags = "通讯录Api")
 public class ContactController {
 
-	private static Logger logger = Logger.getLogger(ContactController.class);
+	private static final Logger logger = LogManager.getLogger(ContactController.class);
 
 	@Autowired
 	private ContactService contactService;

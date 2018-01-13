@@ -6,7 +6,8 @@ package com.pcbwx.shiro.common;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * 非法Token管理类，用于存放被踢走的用户Token
@@ -15,8 +16,7 @@ import org.apache.log4j.Logger;
  *
  */
 public class InvalidTokenManager {
-	private static final Logger logger = Logger
-			.getLogger(InvalidTokenManager.class);
+	private static final Logger logger = LogManager.getLogger(InvalidTokenManager.class);
 
 	private static Set<String> tokenSet = new HashSet<String>();
 

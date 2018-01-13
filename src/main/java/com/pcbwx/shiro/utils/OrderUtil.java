@@ -1,6 +1,7 @@
 package com.pcbwx.shiro.utils;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * 公共通用util工具包
@@ -11,7 +12,7 @@ import org.apache.log4j.Logger;
  */
 public class OrderUtil {
 
-	private static final Logger logger = Logger.getLogger(OrderUtil.class);
+	private static final Logger logger = LogManager.getLogger(OrderUtil.class);
 	
 	public static boolean isFinished(String orderState) {
 		if (orderState.equals("设计结算") || orderState.equals("设计投产")) {

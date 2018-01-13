@@ -3,7 +3,8 @@ package com.pcbwx.shiro.utils;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -16,7 +17,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  */
 public class MyServletContextListener implements ServletContextListener {
 
-	private static final Logger logger = Logger.getLogger(MyServletContextListener.class);
+	private static final Logger logger = LogManager.getLogger(MyServletContextListener.class);
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {

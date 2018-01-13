@@ -7,12 +7,14 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pcbwx.shiro.component.LogContext;
 import com.pcbwx.shiro.exception.ServiceException;
 
 /**
@@ -25,7 +27,7 @@ import com.pcbwx.shiro.exception.ServiceException;
 @Api(tags = "检测服务器网络接口")
 public class ReachableController {
 	
-	private static final Logger logger = Logger.getLogger(ReachableController.class);
+	private static final Logger logger = LogManager.getLogger(LogContext.class);
 	
 	/**
 	 * 方法名：reachable

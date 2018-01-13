@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -26,7 +27,7 @@ public class JsonUtil {
 	private static JsonUtil ju;
 	private static JsonFactory jf;
 	private static ObjectMapper mapper;
-	private static final Logger logger = Logger.getLogger(JsonUtil.class);
+	private static final Logger logger = LogManager.getLogger(JsonUtil.class);
 
 	private JsonUtil() {
 	}

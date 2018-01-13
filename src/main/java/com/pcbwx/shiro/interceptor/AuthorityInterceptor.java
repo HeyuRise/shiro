@@ -7,7 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -28,8 +29,7 @@ import com.pcbwx.shiro.utils.SessionManager;
 public class AuthorityInterceptor extends HandlerInterceptorAdapter implements
 		HandlerInterceptor {
 
-	private static Logger logger = Logger
-			.getLogger(AuthorityInterceptor.class);
+	private static final Logger logger = LogManager.getLogger(AuthorityInterceptor.class);
 
 //	@Autowired
 //	private PersonService PersonService;

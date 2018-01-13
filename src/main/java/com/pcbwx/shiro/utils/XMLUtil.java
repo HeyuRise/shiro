@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -24,7 +25,7 @@ import com.pcbwx.shiro.bean.response.Route;
 
 public class XMLUtil {
 	
-	static Logger logger = Logger.getLogger(XMLUtil.class);
+	private static final Logger logger = LogManager.getLogger(XMLUtil.class);
 	
 	/**
 	 * 解析下单返回数据
