@@ -3,7 +3,6 @@ package com.pcbwx.shiro.utils;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -24,7 +23,6 @@ import com.pcbwx.shiro.map.ChannelDeserialize;
  */
 public class CommonUtil {
 
-	private static SimpleDateFormat sdf = null;
 	private static final Logger logger = LogManager.getLogger(CommonUtil.class);
 
 	public static void main(String[] args) {
@@ -159,6 +157,7 @@ public class CommonUtil {
 	 *            子类类型
 	 * @return 子类实例
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Object fatherToChild(Object father, Class childClass) {
 		// if(!(child.getClass().getSuperclass()==father.getClass())){
 		if (!(childClass.getSuperclass() == father.getClass())) {
@@ -208,6 +207,7 @@ public class CommonUtil {
 	 * @return
 	 * @throws Exception
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Object fetchMapFields(Object src, Class dstClazz) throws Exception {
 		Class srcClazz = src.getClass();
 		// Class childClass= child.getClass();

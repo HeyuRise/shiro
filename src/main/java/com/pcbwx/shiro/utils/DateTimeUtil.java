@@ -5,16 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 /**
  * 常用工具函数类. 用静态函数的方法定义一些常用的函数，如字符串转数字、字符串转日期等。 *
  * 
  */
 public class DateTimeUtil {
 
-	private static final Logger logger = LogManager.getLogger(DateTimeUtil.class);
+	//private static final Logger logger = LogManager.getLogger(DateTimeUtil.class);
 	
 	/**
 	 * 将字符串时间转换为Date类型的时间
@@ -191,8 +188,8 @@ public class DateTimeUtil {
 	public static Date getFirstTimeOfMonth(Date date)   {  
         Calendar cDay1 = Calendar.getInstance();  
         cDay1.setTime(date); 
+        cDay1.set(Calendar.DAY_OF_MONTH, 1);
         Date lastDate = cDay1.getTime();  
-        lastDate.setDate(1); 
         String lastTimeStr = date2dateStr(lastDate) + " 00:00:00";
         return dateTimeStr2date(lastTimeStr);  
 	} 
@@ -206,8 +203,8 @@ public class DateTimeUtil {
         Calendar cDay1 = Calendar.getInstance();  
         cDay1.setTime(date);  
         final int lastDay =  cDay1.getActualMaximum(Calendar.DAY_OF_MONTH);  
-        Date lastDate = cDay1.getTime();  
-        lastDate.setDate(lastDay); 
+        cDay1.set(Calendar.DAY_OF_MONTH, lastDay);
+        Date lastDate = cDay1.getTime();
         String lastTimeStr = date2dateStr(lastDate) + " 23:59:59";
         return dateTimeStr2date(lastTimeStr);  
 	} 
@@ -253,8 +250,6 @@ public class DateTimeUtil {
 		Date now = new Date();
 		String timeStr = DateTimeUtil.date2dateTimeStr(now, "yyyyMMddHHmmss");
 		System.out.println(timeStr);
-		
-		Date dd = DateTimeUtil.dateTimeStr2date("2016-08-01");
 	}
 	
 }

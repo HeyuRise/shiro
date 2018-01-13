@@ -97,7 +97,7 @@ public class LogContext {
 				.append(log.getLineNumber()).append("] ").append(type.getCode()).append(" - ")
 				.append(log.getTitle()).append(" >> ").append(log.getContent());
 
-		System.out.println(msg.toString());
+		logger.info(msg.toString());
 
 		return 0;
 	}

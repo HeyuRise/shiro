@@ -1,11 +1,9 @@
 package com.pcbwx.shiro.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class MessageUtil {
 
-	private static final Logger logger = LogManager.getLogger(MessageUtil.class);
+	//private static final Logger logger = LogManager.getLogger(MessageUtil.class);
 
 	/**
 	 * 发送微信通知

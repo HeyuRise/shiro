@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  * @author 王海龙
  *
  */
+@SuppressWarnings("serial")
 public class JsonObjectMapper extends ObjectMapper {
 
 	 public JsonObjectMapper(){  

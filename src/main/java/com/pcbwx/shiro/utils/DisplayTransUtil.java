@@ -1,7 +1,5 @@
 package com.pcbwx.shiro.utils;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * 公共通用util工具包
@@ -12,7 +10,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class DisplayTransUtil {
 
-	private static final Logger logger = LogManager.getLogger(DisplayTransUtil.class);
+	//private static final Logger logger = LogManager.getLogger(DisplayTransUtil.class);
 	
 	public static void main(String[] args) {
 //		CommonUtil.sendAuthCode("18668187252");
@@ -103,53 +101,5 @@ public class DisplayTransUtil {
 			return value.equals("0") || value.equals("");
 		}
 		return false;
-	}
-	/**
-	 * 根据状态判断，将null转换成默认字符串,不为空转换为字符串(带单位)
-	 * @param orderState 订单状态
-	 * @param value 源数据
-	 * @param unit 单位
-	 * @param def 默认字符串
-	 * @return
-	 */
-	public static String null2stringWithState(String orderState, Object value, String unit, String def) {
-		if (OrderUtil.isFinished(orderState)) {
-			if (value == null || DisplayTransUtil.isBlank(value)) {
-				return "0" + unit;
-			}
-			return String.valueOf(value) + unit;
-		} else {
-			return value == null || DisplayTransUtil.isBlank(value) ? def : String.valueOf(value) + unit;
-		}
-	}
-	
-	/**
-	 * 将印制板的长宽尺寸转换为字符串(若无信息转为暂无，没有小数，截去.00)
-	 * @param orderState 订单状态
-	 * @param length 板长
-	 * @param width 板宽
-	 * @return 字符串"长*宽"
-	 */
-	public static String boardSize2String(String orderState, Double length, Double width) {
-		if (length == null || width == null) {
-			if (OrderUtil.isFinished(orderState)) {
-				return "无";
-			}
-			return "暂无";
-		}
-		StringBuilder sb = new StringBuilder();
-		if (length == length.intValue()) {
-			sb.append(length.intValue());
-		} else {
-			sb.append(length);
-		}
-		sb.append("mm * ");
-		if (width == width.intValue()) {
-			sb.append(width.intValue());
-		} else {
-			sb.append(width);
-		}
-		sb.append("mm");
-		return sb.toString();
 	}
 }

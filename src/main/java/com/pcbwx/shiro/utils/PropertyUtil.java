@@ -18,7 +18,7 @@ public class PropertyUtil {
 
 	private static PropertyUtil util = null;
 	private static Map<String,Properties> props = null;
-	private static final Logger logger = LogManager.getLogger(OrderUtil.class);
+	private static final Logger logger = LogManager.getLogger(PropertyUtil.class);
 	private PropertyUtil(){
 		
 	}

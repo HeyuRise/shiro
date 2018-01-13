@@ -16,6 +16,7 @@
 		<slf4j.version>1.7.5</slf4j.version>
 		<log4j.version>2.10.0</log4j.version>
 		<mysql.version>5.1.22</mysql.version>
+		<shiro.version>1.4.0</shiro.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<mybatis-generator.version>1.3.2</mybatis-generator.version>
 	</properties>
@@ -24,7 +25,7 @@
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
 			<!-- <url>http://127.0.0.1:8081/nexus/content/groups/public</url> -->
-			<url>http://devops.pcbwx.com:8081/nexus/content/groups/public</url>
+			<url>http://test.dianziren.cn:8081/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
@@ -32,7 +33,7 @@
 			<id>nexus</id>
 			<name>Team Nexus Repository</name>
 			<!-- <url>http://127.0.0.1:8081/nexus/content/groups/public</url> -->
-			<url>http://devops.pcbwx.com:8081/nexus/content/groups/public</url>
+			<url>http://test.dianziren.cn:8081/nexus/content/groups/public</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -83,59 +84,81 @@
 			<classifier>all</classifier>
 		</dependency>
 		<dependency>
-		  	<groupId>org.springframework.ws</groupId> 
-		  	<artifactId>spring-oxm</artifactId> 
-		  	<version>1.5.10</version>
+			<groupId>org.springframework.ws</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>1.5.10</version>
 		</dependency>
 		<dependency>
-		  	<groupId>org.springframework.ws</groupId> 
-		  	<artifactId>spring-oxm-tiger</artifactId> 
-		  	<version>1.5.10</version>
+			<groupId>org.springframework.ws</groupId>
+			<artifactId>spring-oxm-tiger</artifactId>
+			<version>1.5.10</version>
 		</dependency>
-		
+
 		<!-- spring-security支持 -->
-		<dependency>  
-            <groupId>org.springframework.security</groupId>  
-            <artifactId>spring-security-core</artifactId>  
-            <version>${spring.security.version}</version>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.springframework.security</groupId>  
-            <artifactId>spring-security-web</artifactId>  
-            <version>${spring.security.version}</version>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.springframework.security</groupId>  
-            <artifactId>spring-security-config</artifactId>  
-            <version>${spring.security.version}</version>  
-        </dependency>
-        <dependency>
-    		<groupId>org.springframework.security</groupId>
-    		<artifactId>spring-security-taglibs</artifactId>
-    		<version>${spring.security.version}</version>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.security.version}</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<!-- shiro -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+
 		<!-- 日志相关依赖 -->
-		<dependency>  
-        	<groupId>org.apache.logging.log4j</groupId>  
-        	<artifactId>log4j-api</artifactId>  
-        	<version>${log4j.version}</version>  
-    	</dependency>  
-    	<dependency>  
-        	<groupId>org.apache.logging.log4j</groupId>  
-        	<artifactId>log4j-core</artifactId>  
-        	<version>${log4j.version}</version>  
-    	</dependency>
-     	<dependency>  
-            <groupId>org.apache.logging.log4j</groupId>  
-            <artifactId>log4j-slf4j-impl</artifactId>  
-            <version>${log4j.version}</version>  
-        </dependency>
-        <dependency>
-          	<groupId>org.apache.logging.log4j</groupId>
-          	<artifactId>log4j-web</artifactId>
-          	<version>${log4j.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-web</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
 
 		<!-- 数据库相关依赖 -->
 		<dependency>
@@ -319,11 +342,8 @@
 			<version>${mybatis-generator.version}</version>
 			<scope>test</scope>
 		</dependency>
-<!-- 		<dependency>
-			<groupId>microsoft</groupId>
-			<artifactId>exchange</artifactId>
-			<version>1.2</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>microsoft</groupId> <artifactId>exchange</artifactId> 
+			<version>1.2</version> </dependency> -->
 		<!-- <dependency> <groupId>microsoft-exchange</groupId> <artifactId>exchange-self</artifactId> 
 			<version>1.3</version> </dependency> -->
 		<dependency>
@@ -342,30 +362,24 @@
 			<artifactId>ldapbp</artifactId>
 			<version>1.0</version>
 		</dependency>
-<!-- 		<dependency>
-			<groupId>com.independentsoft</groupId>
-			<artifactId>exchange</artifactId>
-			<version>2.0</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.independentsoft</groupId> <artifactId>exchange</artifactId> 
+			<version>2.0</version> </dependency> -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.4.6</version>
 		</dependency>
-<!-- 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
-			<version>4.0.4.RELEASE</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-taglibs</artifactId> 
+			<version>4.0.4.RELEASE</version> </dependency> -->
 		<dependency>
-	    <groupId>jstl</groupId>
-		    <artifactId>jstl</artifactId>
-		    <version>1.1.2</version>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.1.2</version>
 		</dependency>
 		<dependency>
-		    <groupId>taglibs</groupId>
-		    <artifactId>standard</artifactId>
-		    <version>1.1.2</version>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -388,78 +402,78 @@
 			<version>2.4.0</version>
 		</dependency>
 		<dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.barcode4j</groupId>
-            <artifactId>barcode4j</artifactId>
-            <version>2.1</version>
-            <exclusions>
-            	<exclusion>
-            		<artifactId>avalon-framework-impl</artifactId>
-            		<groupId>avalon-framework</groupId>
-            	</exclusion>
-            </exclusions>
-        </dependency>
-        
-        <dependency>
-		    <groupId>com.google.zxing</groupId>
-		    <artifactId>core</artifactId>
-		    <version>3.2.0</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
 		</dependency>
-		<dependency>  
-            <groupId>com.google.zxing</groupId>  
-            <artifactId>javase</artifactId>  
-            <version>3.2.0</version>  
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.1.29</version>
-        </dependency>
-
-
-        <dependency>
-		    <groupId>org.apache.avalon.framework</groupId>
-		    <artifactId>avalon-framework-impl</artifactId>
-		    <version>4.3.1</version>
+		<dependency>
+			<groupId>net.sf.barcode4j</groupId>
+			<artifactId>barcode4j</artifactId>
+			<version>2.1</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>avalon-framework-impl</artifactId>
+					<groupId>avalon-framework</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
-        </dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.2.0</version>
+		</dependency>
 
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>19.0</version>
-        </dependency>
-        
-         <!--api文档生成插件-->
-        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.7.0</version>
-        </dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.29</version>
+		</dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.7.0</version>
-        </dependency>
-        <dependency>
-        	<groupId>org.apache.ant</groupId>
-        	<artifactId>ant-commons-net</artifactId>
-        	<version>1.10.1</version>
-        </dependency>
+
+		<dependency>
+			<groupId>org.apache.avalon.framework</groupId>
+			<artifactId>avalon-framework-impl</artifactId>
+			<version>4.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>19.0</version>
+		</dependency>
+
+		<!--api文档生成插件 -->
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant-commons-net</artifactId>
+			<version>1.10.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -505,7 +519,6 @@
 				<filtering>true</filtering>
 				<includes>
 					<include>jdbc.properties</include>
-					<include>log4j.properties</include>
 					<include>config.properties</include>
 				</includes>
 			</resource>
@@ -517,7 +530,6 @@
 				</includes>
 				<excludes>
 					<exclude>jdbc.properties</exclude>
-					<exclude>log4j.properties</exclude>
 					<exclude>config.properties</exclude>
 				</excludes>
 			</resource>
@@ -551,37 +563,5 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	<profiles>
-		<!-- 开发环境日志配置 -->
-		<profile>
-			<id>dev_config</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<mybatis.logger>debug</mybatis.logger>
-				<service.logger>debug</service.logger>
-				<log4j.rootLogger>info,stdout</log4j.rootLogger>
-				<info.file>D:/logs/shiro_info.log</info.file>
-				<error.file>D:/logs/shiro_error.log</error.file>
-				<system.company>pcbwx</system.company>
-			</properties>
-		</profile>
-		<!-- 线上环境日志配置 -->
-		<profile>
-			<id>online_config</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<properties>
-				<mybatis.logger>debug</mybatis.logger>
-				<service.logger>debug</service.logger>
-				<log4j.rootLogger>info,file_info,file_error</log4j.rootLogger>
-				<info.file>/opt/tbwechat/logs/shiro/info.log</info.file>
-				<error.file>/opt/tbwechat/logs/shiro/error.log</error.file>
-				<system.company>pcbwx</system.company>
-			</properties>
-		</profile>
-	</profiles>
-	
+
 </project>

@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Address;
@@ -21,30 +20,12 @@ import javax.mail.Store;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeUtility;
 
-import com.pcbwx.shiro.utils.BASE64MD5Util;
-import com.pcbwx.shiro.utils.DateTimeUtil;
 import com.pcbwx.shiro.utils.HttpUtil;
 
 public class TestHeyu3 {
 
 	public static void main(String[] args) throws MessagingException {
-		Date now = new Date();
-		Date yes = DateTimeUtil.dateStr2date("2017-10-21");
-		if (now.after(null)) {
-			System.out.println("----------------");
-		}
-		//Date now = new Date();
-		//System.out.println(DateTimeUtil.date2dateTimeStr(now, "yyyyMMddHHmmss"));
-		// send();
-		// receive();
-		//routPush();
-//		//receive();
-//		String a = "147582";
-//		String b = "";
-//		String c = "32145+6";
-//		System.out.println(a+b+c);
-//		System.out.println(BASE64MD5Util.md5(a+b+c));
-		System.out.println(BASE64MD5Util.md5_16("江苏省无锡市滨湖区湖滨路688号华东大厦20楼"));
+
 	}
 
 	public static void routPush() {

@@ -63,7 +63,7 @@ public class JsonUtil {
 			jf = getFactory();
 			mapper = getMapper();
 			StringWriter out = new StringWriter();
-			jg = jf.createJsonGenerator(out);
+			jg = jf.createGenerator(out);
 			mapper.writeValue(jg, obj);
 			return out.toString();
 		} catch (IOException e) {

@@ -5,8 +5,6 @@ import javax.servlet.ServletContextListener;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  * 应用启动监听器类
@@ -21,8 +19,8 @@ public class MyServletContextListener implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		ApplicationContext applicationContext = WebApplicationContextUtils.getRequiredWebApplicationContext(sce
-				.getServletContext());
+//		ApplicationContext applicationContext = WebApplicationContextUtils.getRequiredWebApplicationContext(sce
+//				.getServletContext());
 
 		// 删除会话表记录
 //		AccountSessionService accountSessionService = applicationContext.getBean(AccountSessionService.class);
