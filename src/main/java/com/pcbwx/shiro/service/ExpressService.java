@@ -3,7 +3,7 @@ package com.pcbwx.shiro.service;
 import java.util.Map;
 
 import com.pcbwx.shiro.bean.request.Order;
-import com.pcbwx.shiro.bean.user.WxtbAuthUser;
+import com.pcbwx.shiro.model.WxtbUser;
 
 /**
  * 下单模块业务接口
@@ -15,7 +15,7 @@ public interface ExpressService {
 	/**
 	 * 下单
 	 */
-	Map<String, Object> expressOrder(WxtbAuthUser wxtbUser, Integer companyId, Order order, String orderId);
+	Map<String, Object> expressOrder(WxtbUser wxtbUser, Integer companyId, Order order, String orderId);
 	/**
 	 * 处理二维码中的信息
 	 */

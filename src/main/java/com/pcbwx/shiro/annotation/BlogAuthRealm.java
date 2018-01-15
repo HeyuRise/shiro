@@ -1,8 +1,10 @@
 package com.pcbwx.shiro.annotation;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -22,21 +24,20 @@ import com.pcbwx.shiro.model.WxtbUser;
  * 实现用户认证与授权
  */
 public class BlogAuthRealm extends AuthorizingRealm {
-
+	
+	private static final Logger logger = LogManager.getLogger(BlogAuthRealm.class);
+	
     @Autowired
     private WxtbUserMapper wxtbUserMapper;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
     	WxtbUser wxtbUser = (WxtbUser) principalCollection.getPrimaryPrincipal();
-        List<String> permissionList=new ArrayList<>();
-        List<String> roleList=new ArrayList<>();
-        
-        
+        logger.info("获取用户" + wxtbUser.getUsername() + "角色权限信息");
         SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
-        info.addStringPermissions(permissionList);
-        info.addRoles(roleList);
-        System.out.println("获取用户角色权限信息");
+        Set<String> roleList = new HashSet<String>();
+        roleList.add("管理员");
+        info.setRoles(roleList);
         return info;
     }
 

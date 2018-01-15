@@ -14,7 +14,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.pcbwx.shiro.bean.system.AddServiceBean;
 import com.pcbwx.shiro.bean.system.ExpressCompanyInfo;
 import com.pcbwx.shiro.bean.system.ProductInfo;
-import com.pcbwx.shiro.bean.user.WxtbAuthUser;
 import com.pcbwx.shiro.component.CacheService;
 import com.pcbwx.shiro.dao.ExpressCompanyMapper;
 import com.pcbwx.shiro.dao.ExpressProductMapper;
@@ -24,6 +23,7 @@ import com.pcbwx.shiro.enums.DictionaryEnum;
 import com.pcbwx.shiro.model.Dictionary;
 import com.pcbwx.shiro.model.ExpressCompany;
 import com.pcbwx.shiro.model.ExpressProduct;
+import com.pcbwx.shiro.model.WxtbUser;
 import com.pcbwx.shiro.service.SupportService;
 import com.pcbwx.shiro.service.SystemService;
 /**
@@ -46,7 +46,7 @@ public class SystemServiceImpl implements SystemService{
 	private SupportService supportService;
 	
 	@Override
-	public List<ProductInfo> getProductInfos(WxtbAuthUser wxtbUser, String productName) {
+	public List<ProductInfo> getProductInfos(WxtbUser wxtbUser, String productName) {
 		List<ExpressCompany> expressCompanies = expressCompanyMapper.load(null);
 		if (expressCompanies == null) {
 			expressCompanies = new ArrayList<ExpressCompany>();
@@ -196,7 +196,7 @@ public class SystemServiceImpl implements SystemService{
 
 
 	@Override
-	public List<AddServiceBean> getAddservice(WxtbAuthUser wxtbUser, String serviceName) {
+	public List<AddServiceBean> getAddservice(WxtbUser wxtbUser, String serviceName) {
 		List<com.pcbwx.shiro.model.Service> services = serviceMapper.selectByCondition(serviceName);
 		if (services == null || services.isEmpty()) {
 			return new ArrayList<AddServiceBean>();

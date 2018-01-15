@@ -8,8 +8,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pcbwx.shiro.bean.request.Order;
-import com.pcbwx.shiro.bean.user.WxtbAuthUser;
 import com.pcbwx.shiro.common.ConfigProperties;
 import com.pcbwx.shiro.enums.ActionTypeEnum;
 import com.pcbwx.shiro.enums.ErrorCodeEnum;
+import com.pcbwx.shiro.model.WxtbUser;
 import com.pcbwx.shiro.service.ExpressService;
 import com.pcbwx.shiro.service.LogService;
 import com.pcbwx.shiro.service.SupportService;
@@ -44,8 +44,7 @@ public class ExpressController {
 	public Map<String, Object> sfExpressOrder(HttpServletRequest request, 
 			@RequestParam("companyId") Integer comapnyId,
 			@RequestBody Order order){
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		Map<String, Object> response = new HashMap<String, Object>();
 		if (order == null) {
 			response.put("result", ErrorCodeEnum.SYSTEM_ERROR.getCode());
@@ -67,8 +66,7 @@ public class ExpressController {
 	@ApiOperation("二维码信息转运单信息")
 	public Map<String, Object> opearteQRCode(HttpServletRequest request,
 			@RequestParam("text") String text){
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.EXPRESS_INFO.getCode(), wxtbUser.getAccount(), text);
 		return expressService.operateQRCode(text);
 	}

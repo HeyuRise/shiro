@@ -1,16 +1,16 @@
 package com.pcbwx.shiro.control;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,11 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.pcbwx.shiro.bean.system.AddServiceBean;
 import com.pcbwx.shiro.bean.system.ExpressCompanyInfo;
 import com.pcbwx.shiro.bean.system.ProductInfo;
-import com.pcbwx.shiro.bean.user.WxtbAuthUser;
 import com.pcbwx.shiro.common.ConfigProperties;
-import com.pcbwx.shiro.control.BaseController;
 import com.pcbwx.shiro.enums.ActionTypeEnum;
 import com.pcbwx.shiro.enums.ErrorCodeEnum;
+import com.pcbwx.shiro.model.WxtbUser;
 import com.pcbwx.shiro.service.LogService;
 import com.pcbwx.shiro.service.SystemService;
 
@@ -44,8 +43,7 @@ public class SysSettingController extends BaseController {
 	public List<ProductInfo> getExpressTypeInfos(
 			HttpServletRequest request,
 			@RequestParam(value = "productName", required = false) String productName) {
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.SYSTEM_PRODUCT.getCode(), wxtbUser.getAccount(), productName);
 		return systemService.getProductInfos(wxtbUser, productName);
 	}
@@ -56,8 +54,7 @@ public class SysSettingController extends BaseController {
 	public Map<String, Object> operateProduct(
 			HttpServletRequest request,
 			@RequestParam("productId") Integer productId) {
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		Map<String, Object> response = new HashMap<String, Object>();
 		Integer isSuccess = systemService.enableProduct(productId);
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.PRODUCT_ENABLE.getCode(), wxtbUser.getAccount(), productId.toString());
@@ -82,8 +79,7 @@ public class SysSettingController extends BaseController {
 			@RequestParam("productCode") String productCode,
 			@RequestParam("productName") String productName,
 			@RequestParam("enable") String enable) {
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		Map<String, Object> response = new HashMap<String, Object>();
 		if (productCode.equals("") || productName.equals("")
 				|| enable.equals("")) {
@@ -109,8 +105,7 @@ public class SysSettingController extends BaseController {
 	public List<ExpressCompanyInfo> getCompanyInfos(
 			HttpServletRequest request,
 			@RequestParam(value = "companyName", required = false) String companyName) {
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.SYSTEM_COMPANY.getCode(), wxtbUser.getAccount(), companyName);
 		return systemService.getExpressCompanyInfos(companyName);
 	}
@@ -121,8 +116,7 @@ public class SysSettingController extends BaseController {
 	public List<AddServiceBean> getAddServiceBeans(
 			HttpServletRequest request,
 			@RequestParam(value = "serviceName", required = false) String serviceName) {
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.SYSTEM_SERVICE.getCode(), wxtbUser.getAccount(), serviceName);
 		return systemService.getAddservice(wxtbUser, serviceName);
 	}
@@ -132,8 +126,7 @@ public class SysSettingController extends BaseController {
 	@ApiOperation("启用/禁用服务")
 	public Map<String, Object> operateAddService(HttpServletRequest request,
 			@RequestParam("serviceName") String serviceName) {
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		Map<String, Object> response = new HashMap<String, Object>();
 		if (serviceName == null || serviceName.equals("")) {
 			response.put("result", ErrorCodeEnum.SYSTEM_ERROR.getCode());

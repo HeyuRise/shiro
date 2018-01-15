@@ -11,15 +11,12 @@ import java.util.Set;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.pcbwx.shiro.common.ConfigProperties;
 import com.pcbwx.shiro.utils.BASE64MD5Util;
 import com.pcbwx.shiro.utils.FileUtil;
 
 public class HeyuTest4 {
 	public static void main(String[] args) throws IOException {
-		String xml = FileUtil.readFileString("d:/aaa.txt");
-		String data = xml + ConfigProperties.getCheckCode();
-		System.out.println(BASE64MD5Util.md5_16(data));
+		System.out.println(BASE64MD5Util.md5("123456"));
 	}
 	
 	public static void operate(){

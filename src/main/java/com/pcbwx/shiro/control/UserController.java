@@ -10,8 +10,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.pcbwx.shiro.bean.request.AddUser;
 import com.pcbwx.shiro.bean.user.Role;
 import com.pcbwx.shiro.bean.user.UserManageInfo;
-import com.pcbwx.shiro.bean.user.WxtbAuthUser;
 import com.pcbwx.shiro.common.ConfigProperties;
-import com.pcbwx.shiro.control.BaseController;
 import com.pcbwx.shiro.enums.ActionTypeEnum;
 import com.pcbwx.shiro.enums.ErrorCodeEnum;
+import com.pcbwx.shiro.model.WxtbUser;
 import com.pcbwx.shiro.service.LogService;
 import com.pcbwx.shiro.service.UserService;
 
@@ -47,8 +46,7 @@ public class UserController extends BaseController {
 	@ApiOperation(value = "获取角色列表")
 	public List<Role> getRoles(HttpServletRequest request,
 			@RequestParam( value = "roleName", required = false) String roleName) {
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.ROLE.getCode(), wxtbUser.getAccount(), roleName);
 		List<Role> roles = userService.getRoles(roleName);
 		if (roles == null) {
@@ -66,8 +64,7 @@ public class UserController extends BaseController {
 			@RequestParam( value = "department", required = false) String department,
 			@RequestParam( value = "roleName", required = false) String roleName,
 			@RequestParam( value = "enable", required = false) String enable){
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		List<UserManageInfo> userManageInfos = userService.getUserInfos(wxtbUser.getAccount(), name, account, department, roleName, enable);
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.USERS.getCode(), wxtbUser.getAccount(), null);
 		if (userManageInfos == null) {
@@ -81,8 +78,7 @@ public class UserController extends BaseController {
 	@ApiOperation("新建用户,department为部门编号,roleIds为角色id集合,enable传汉字'启用','禁用'")
 	public Map<String, Object> addUser(HttpServletRequest request,
 			@RequestBody AddUser addUser){
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		Map<String, Object> response = new HashMap<String, Object>();
 		if (addUser == null) {
 			response.put("result", ErrorCodeEnum.SYSTEM_ERROR.getCode());
@@ -110,8 +106,7 @@ public class UserController extends BaseController {
 	@ApiOperation("启用/禁用")
 	public Map<String, Object> operateEnable(HttpServletRequest request,
 			@RequestParam("account") String account){
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		Map<String, Object> response = new HashMap<String, Object>();
 		if (account.equals("")) {
 			response.put("result", ErrorCodeEnum.SYSTEM_ERROR.getCode());
@@ -135,8 +130,7 @@ public class UserController extends BaseController {
 	public Map<String, Object> setUserRole(HttpServletRequest request,
 			@RequestParam("account") String account,
 			@RequestParam( value = "roleId", required = false) List<Integer> roleId){
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		Map<String, Object> response = new HashMap<String, Object>();
 		if (account == null || account.equals("")) {
 			response.put("result", ErrorCodeEnum.SYSTEM_ERROR.getCode());
@@ -159,8 +153,7 @@ public class UserController extends BaseController {
 	@ApiOperation("重置密码")
 	public Map<String, Object> verfityPassword(HttpServletRequest request,
 			@RequestParam("account") String account){
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		Map<String, Object> response = new HashMap<String, Object>();
 		Integer result = userService.resetPassword(account, PASSWORD);
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.USER_PASSWORD.getCode(), wxtbUser.getAccount(), account);

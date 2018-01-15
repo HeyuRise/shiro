@@ -15,8 +15,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,10 +26,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.pcbwx.shiro.bean.contact.Recipient;
 import com.pcbwx.shiro.bean.contact.SenderAddressBean;
 import com.pcbwx.shiro.bean.contact.SenderBean;
-import com.pcbwx.shiro.bean.user.WxtbAuthUser;
 import com.pcbwx.shiro.common.ConfigProperties;
 import com.pcbwx.shiro.component.LogContext;
 import com.pcbwx.shiro.enums.ActionTypeEnum;
+import com.pcbwx.shiro.model.WxtbUser;
 import com.pcbwx.shiro.service.ContactService;
 import com.pcbwx.shiro.service.LogService;
 
@@ -56,8 +56,7 @@ public class ContactController {
 			@RequestParam(value = "city", required = false) String city,
 			@RequestParam(value = "county", required = false) String county,
 			@RequestParam(value = "address", required = false) String address) {
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.CONTACT_RECIPIENT.getCode(), wxtbUser.getAccount(), null);
 		if (company == null || company.equals("")) {
 			company = null;
@@ -92,8 +91,7 @@ public class ContactController {
 			@RequestParam(value = "city", required = false) String city,
 			@RequestParam(value = "county", required = false) String county,
 			@RequestParam(value = "address", required = false) String address) {
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.RECIPIENT_EXPORT.getCode(), wxtbUser.getAccount(), null);
 		if (company == null || company.equals("")) {
 			company = null;
@@ -136,8 +134,7 @@ public class ContactController {
 	@ApiOperation("寄件人信息列表")
 	public List<SenderBean> getSenders(HttpServletRequest request,
 			@RequestParam(value = "contact", required = false) String contact) {
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.CONTACT_SENDER.getCode(), wxtbUser.getAccount(), contact);
 		if (contact == null || contact.equals("")) {
 			contact = null;
@@ -151,8 +148,7 @@ public class ContactController {
 	public void senderExport(HttpServletRequest request,
 			HttpServletResponse response,
 			@RequestParam(value = "contact", required = false) String contact) {
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.SENDER_EXPORT.getCode(), wxtbUser.getAccount(), contact);
 		if (contact == null || contact.equals("")) {
 			contact = null;
@@ -184,8 +180,7 @@ public class ContactController {
 			@RequestParam(value = "city", required = false) String city,
 			@RequestParam(value = "county", required = false) String county,
 			@RequestParam(value = "address", required = false) String address) {
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.SENDER_ADDRESS.getCode(), wxtbUser.getAccount(), null);
 		if (province == null || province.equals("")) {
 			province = null;
@@ -212,8 +207,7 @@ public class ContactController {
 			@RequestParam(value = "city", required = false) String city,
 			@RequestParam(value = "county", required = false) String county,
 			@RequestParam(value = "address", required = false) String address){
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.SENDER_ADDRESS_EXPORT.getCode(), wxtbUser.getAccount(), null);
 		if (province == null || province.equals("")) {
 			province = null;

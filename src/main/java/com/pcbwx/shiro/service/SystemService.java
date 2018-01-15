@@ -6,7 +6,7 @@ import java.util.Map;
 import com.pcbwx.shiro.bean.system.AddServiceBean;
 import com.pcbwx.shiro.bean.system.ExpressCompanyInfo;
 import com.pcbwx.shiro.bean.system.ProductInfo;
-import com.pcbwx.shiro.bean.user.WxtbAuthUser;
+import com.pcbwx.shiro.model.WxtbUser;
 /**
  * 系统设置模块接口
  * 
@@ -20,7 +20,7 @@ public interface SystemService {
 	 * @param expressType
 	 * @return
 	 */
-	List<ProductInfo> getProductInfos(WxtbAuthUser wxtbUser, String productName);
+	List<ProductInfo> getProductInfos(WxtbUser wxtbUser, String productName);
 	
 	/**
 	 * 获取快递公司下拉框
@@ -81,7 +81,7 @@ public interface SystemService {
 	 * @param serviceName
 	 * @return
 	 */
-	List<AddServiceBean> getAddservice(WxtbAuthUser wxtbUser, String serviceName);
+	List<AddServiceBean> getAddservice(WxtbUser wxtbUser, String serviceName);
 	
 	/**
 	 * 启用/禁用服务

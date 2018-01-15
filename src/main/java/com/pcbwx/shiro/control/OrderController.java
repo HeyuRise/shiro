@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,11 +25,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pcbwx.shiro.bean.response.ResponseRoute;
-import com.pcbwx.shiro.bean.user.WxtbAuthUser;
 import com.pcbwx.shiro.common.ConfigProperties;
 import com.pcbwx.shiro.component.LogContext;
 import com.pcbwx.shiro.enums.ActionTypeEnum;
 import com.pcbwx.shiro.enums.ErrorCodeEnum;
+import com.pcbwx.shiro.model.WxtbUser;
 import com.pcbwx.shiro.service.LogService;
 import com.pcbwx.shiro.service.OrderService;
 import com.pcbwx.shiro.service.RouteService;
@@ -190,8 +190,7 @@ public class OrderController extends BaseController {
 		if (status == null || status.equals("")) {
 			status = null;
 		}
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.ORDER_EXPRESS_EXPORT.getCode(), wxtbUser.getAccount(), null);
 		SXSSFWorkbook workbook = orderService.expressExport(orderId, mailno, mailnoChild, sendCompany,
 				receiveCompany, sendContact, receiveContact, sendDateBegin,

@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pcbwx.shiro.bean.system.AddressInfo;
-import com.pcbwx.shiro.bean.user.WxtbAuthUser;
 import com.pcbwx.shiro.common.ConfigProperties;
 import com.pcbwx.shiro.component.LogContext;
 import com.pcbwx.shiro.enums.ActionTypeEnum;
+import com.pcbwx.shiro.model.WxtbUser;
 import com.pcbwx.shiro.service.LogService;
 import com.pcbwx.shiro.service.OrderService;
 
@@ -45,8 +45,7 @@ public class AddressController {
 			@RequestParam(value = "province", required = false) String province,
 			@RequestParam(value = "city", required = false) String city,
 			@RequestParam(value = "county", required = false) String county){
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.SYSTEM_ADDRESS.getCode(), wxtbUser.getAccount(), province, city, county);
 		return orderService.getAddressInfos(province, city, county);
 	}
@@ -58,8 +57,7 @@ public class AddressController {
 			@RequestParam(value = "province", required = false) String province,
 			@RequestParam(value = "city", required = false) String city,
 			@RequestParam(value = "county", required = false) String county){
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		logService.addAction(ConfigProperties.getMySystemCode(), ActionTypeEnum.ADDRESS_EXPORT.getCode(), wxtbUser.getAccount(), province, city, county);
 		XSSFWorkbook xssfWorkbook = orderService.addressExport(province, city, county);
 		String fileName = "全国行政区列表.xlsx";

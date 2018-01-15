@@ -45,29 +45,22 @@
             </div>
         </div>
          <div class="login">
-            <form id="form" name='f'   action="/shiro/j_spring_security_check" method="POST" onsubmit = "return login();">
+            <form id="form" name='f'   action="/shiro/login" method="POST">
                 <div class="login-title" id="message">
                     	输入您的用户名和密码<br>
                     	点击登录进入系统
                 </div>
-                 <div class="col-xs-12">   
-                     <p id="session"style="text-align:center;color:red;display: none;">${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</p>  
-                     <%
-                     session.setAttribute("SPRING_SECURITY_LAST_EXCEPTION", new Exception(""));
-                     %>
-        				
-                 </div> 
-
-
-
+                <div class="col-xs-12">   
+                     <p id="session"style="text-align:center;color:red;display: none;"></p>
+                </div> 
                 <div style="margin-top: 59px;margin-left: 80px;">
                     <div class="input_content">
-                        <input type="text" oninput="webChange()" id="Username" class="input" name='j_username'  placeholder="请输入用户名" autocomplete="on">
+                        <input type="text" oninput="webChange()" id="Username" class="input" name='username'  placeholder="请输入用户名" autocomplete="on">
                         <i class="iconfont icon">&#xe892;</i>
                     </div>
                     <div class="input_content" style="margin-top: 40px;">
      					<input class="input"  type="password"  id="txtPwd" placeholder="请输入密码" style="display: none"/> 
-                        <input id="PSD"  class="input" name='j_password' placeholder="请输入密码" type="password" autocomplete="off" autocomplete="new-password" >
+                        <input id="PSD"  class="input" name='password' placeholder="请输入密码" type="password" autocomplete="off" autocomplete="new-password" >
                         <i class="iconfont icon">&#xe867;</i>
                     </div>
                     <div class="checkbox checkbox-login" style="margin-top: 40px;">

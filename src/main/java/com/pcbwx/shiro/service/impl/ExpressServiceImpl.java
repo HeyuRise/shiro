@@ -27,7 +27,6 @@ import com.pcbwx.shiro.bean.request.OrderFilter;
 import com.pcbwx.shiro.bean.request.RequestOrderSearch;
 import com.pcbwx.shiro.bean.request.RequestOrderZD;
 import com.pcbwx.shiro.bean.response.ResponseOrder;
-import com.pcbwx.shiro.bean.user.WxtbAuthUser;
 import com.pcbwx.shiro.component.CacheService;
 import com.pcbwx.shiro.component.LogContext;
 import com.pcbwx.shiro.dao.ExpressMapper;
@@ -52,6 +51,7 @@ import com.pcbwx.shiro.model.Sender;
 import com.pcbwx.shiro.model.SenderAddress;
 import com.pcbwx.shiro.model.ServiceRelation;
 import com.pcbwx.shiro.model.Sustenance;
+import com.pcbwx.shiro.model.WxtbUser;
 import com.pcbwx.shiro.service.ExpressService;
 import com.pcbwx.shiro.service.SupportService;
 import com.pcbwx.shiro.utils.BASE64MD5Util;
@@ -125,7 +125,7 @@ public class ExpressServiceImpl implements ExpressService{
 	}
 	
 	@Override
-	public Map<String, Object> expressOrder(WxtbAuthUser wxtbUser, Integer companyId, Order order, String orderId) {
+	public Map<String, Object> expressOrder(WxtbUser wxtbUser, Integer companyId, Order order, String orderId) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		Date now = new Date();
 		String innerOrderId = order.getOrderId();

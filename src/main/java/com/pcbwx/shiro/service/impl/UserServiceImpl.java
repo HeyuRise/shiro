@@ -17,7 +17,6 @@ import com.pcbwx.shiro.bean.user.MainMenu;
 import com.pcbwx.shiro.bean.user.MenuItem;
 import com.pcbwx.shiro.bean.user.Role;
 import com.pcbwx.shiro.bean.user.UserManageInfo;
-import com.pcbwx.shiro.bean.user.WxtbAuthUser;
 import com.pcbwx.shiro.component.CacheService;
 import com.pcbwx.shiro.dao.UserRoleMapper;
 import com.pcbwx.shiro.dao.UserRoleRelationMapper;
@@ -53,7 +52,7 @@ public class UserServiceImpl implements UserService {
 	private SupportService supportService;
 
 	@Override
-	public Map<String, Object> getUserDetail(WxtbAuthUser wxtbUser) {
+	public Map<String, Object> getUserDetail(WxtbUser wxtbUser) {
 		Map<String, Object> response = new HashMap<String, Object>();
 		String account = wxtbUser.getAccount();
 		String username = wxtbUser.getUsername();

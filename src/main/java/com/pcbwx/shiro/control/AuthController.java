@@ -8,19 +8,18 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.pcbwx.shiro.bean.user.WxtbAuthUser;
 import com.pcbwx.shiro.common.ConfigProperties;
-import com.pcbwx.shiro.control.BaseController;
 import com.pcbwx.shiro.enums.ActionTypeEnum;
 import com.pcbwx.shiro.enums.ErrorCodeEnum;
+import com.pcbwx.shiro.model.WxtbUser;
 import com.pcbwx.shiro.service.AccountService;
 import com.pcbwx.shiro.service.LogService;
 import com.pcbwx.shiro.service.UserService;
@@ -41,8 +40,7 @@ public class AuthController extends BaseController {
 	@ResponseBody
 	@ApiOperation("获取用户详情")
 	public Map<String, Object> getUserAuths(HttpServletRequest request) {
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		Map<String, Object> response = new HashMap<String, Object>();
 		if (wxtbUser == null) {
 			response.put("result", ErrorCodeEnum.SYSTEM_ERROR.getCode());
@@ -82,8 +80,7 @@ public class AuthController extends BaseController {
 	public Map<String, Object> buttonAppear(HttpServletRequest request,
 			@RequestParam("buttonId") Integer buttonId){
 		Map<String, Object> response = new HashMap<String, Object>();
-		WxtbAuthUser wxtbUser = (WxtbAuthUser) SecurityContextHolder
-				.getContext().getAuthentication().getPrincipal();
+		WxtbUser wxtbUser = (WxtbUser) SecurityUtils.getSubject().getPrincipal();
 		boolean idAppear = accountService.getButtonAppear(wxtbUser.getAccount(), buttonId);
 		if (idAppear) {
 			response.put("result", ErrorCodeEnum.SUCCESS.getCode());

@@ -6,7 +6,7 @@ import java.util.Map;
 import com.pcbwx.shiro.bean.request.AddUser;
 import com.pcbwx.shiro.bean.user.Role;
 import com.pcbwx.shiro.bean.user.UserManageInfo;
-import com.pcbwx.shiro.bean.user.WxtbAuthUser;
+import com.pcbwx.shiro.model.WxtbUser;
 
 /**
  * 用户模块接口
@@ -21,7 +21,7 @@ public interface UserService {
 	 * @param wxtbUser
 	 * @return
 	 */
-	Map<String, Object> getUserDetail(WxtbAuthUser wxtbUser);
+	Map<String, Object> getUserDetail(WxtbUser wxtbUser);
 
 	/**
 	 * 获取角色列表
