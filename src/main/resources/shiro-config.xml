@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- 缓存管理 -->
+    <bean id="mycacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+    
+    <bean id="shiroService" class="com.pcbwx.shiro.service.impl.ShiroServiceImpl"/>
+    <!-- 凭证匹配器 -->
+    <bean id="credentialsMatcher" class="com.pcbwx.shiro.annotation.CredentialMatcher"/>
+
+    <!-- Realm实现 -->
+    <bean id="userRealm" class="com.pcbwx.shiro.annotation.BlogAuthRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+
+    <!-- 安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="userRealm"/>
+        <property name="cacheManager" ref="mycacheManager"/>
+    </bean>
+
+    <!-- Shiro的Web过滤器 -->
+    <bean id="shiroFilter" class="com.pcbwx.shiro.annotation.ShiroPermissionFactory">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="shiroService" ref="shiroService"/>
+        <property name="loginUrl" value="/login.jsp"/>
+        <!-- 登录成功跳转页面的配置 -->
+        <property name="successUrl" value="/index.html"/>
+        <!-- Shiro连接约束配置,即过滤链的定义 -->
+        <property name="filterChainDefinitions">
+            <value>
+                /login=anon
+                <!--/** = authc-->
+            </value>
+        </property>
+    </bean>
+    
+    <!-- Shiro生命周期处理器-->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+</beans>
