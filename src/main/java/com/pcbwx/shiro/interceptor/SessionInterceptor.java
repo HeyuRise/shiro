@@ -5,11 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.pcbwx.shiro.service.AccountService;
 
 /**
  * 权限拦截器
@@ -20,9 +17,6 @@ import com.pcbwx.shiro.service.AccountService;
 public class SessionInterceptor implements HandlerInterceptor {
 
 	private static final Logger logger = LogManager.getLogger(SessionInterceptor.class);
-
-	@Autowired
-	private AccountService accountService;
 	
 	/**
 	 * 在controller后拦截

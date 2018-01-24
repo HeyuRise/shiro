@@ -11,8 +11,6 @@ import com.pcbwx.shiro.component.LogContext;
 import com.pcbwx.shiro.enums.ConfigEnum;
 import com.pcbwx.shiro.enums.TaskClockEnum;
 import com.pcbwx.shiro.service.ConfigService;
-import com.pcbwx.shiro.service.ExpressService;
-import com.pcbwx.shiro.service.OrderService;
 import com.pcbwx.shiro.service.SupportService;
 import com.pcbwx.shiro.utils.DateTimeUtil;
 
@@ -29,11 +27,7 @@ public class QuartzJob {
 	@Autowired
 	private SupportService supportService;
 	@Autowired
-	private ExpressService expressService;
-	@Autowired
 	private ConfigService configService;
-	@Autowired
-	private OrderService orderService;
 
 	@Autowired
 	private ImportTask importTask;

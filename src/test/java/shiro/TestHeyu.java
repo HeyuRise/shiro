@@ -4,12 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.pcbwx.shiro.bean.request.Order;
 import com.pcbwx.shiro.bean.request.RouteSearch;
 import com.pcbwx.shiro.common.ConfigProperties;
-import com.pcbwx.shiro.dao.AddressMapper;
 import com.pcbwx.shiro.utils.SFUtil;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.OkHttpClient;
@@ -19,9 +16,6 @@ import com.squareup.okhttp.Response;
 
 
 public class TestHeyu {
-	
-	@Autowired
-	private static AddressMapper addressMapper;
 	
 	private static OkHttpClient client = new OkHttpClient();
 	public static final int TYPE_MAILNO = 1;
